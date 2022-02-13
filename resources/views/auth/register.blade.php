@@ -15,54 +15,50 @@
 </head>
 
 <body>
-
     @section('content_auth')
-    <div class="window_box">
-        <h2>Registration</h2>
-
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-            <ul>
-                <li>
-                    <!-- Name -->
-                    <div class="user_fill__name">
-                        <input id="name" class="user_fill__name" type="text" name="name" placeholder="Username" required autofocus>
+    <div class="window_box_container">
+        <div class="window_box">
+            <h2>Registration</h2>
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+                <ul>
+                    <li>
+                        <!-- Name -->
+                        <div class="user_fill__name">
+                            <input id="name" class="user_fill__name" type="text" name="name" placeholder="Username" required autofocus>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- Email Address -->
+                        <div class="user_fill__email">
+                            <input id="email" class="" type="email" name="email" placeholder="Email" required>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- Password -->
+                        <div class="user_fill__password">
+                            <input id="password" class="" type="password" name="password" placeholder="Password" required>
+                        </div>
+                    </li>
+                    <div class="">
+                        <button class="bluetype">登録</button>
                     </div>
-                </li>
-                <li>
-                    <!-- Email Address -->
-                    <div class="user_fill__email">
-                        <input id="email" class="" type="email" name="email" placeholder="Email" required>
+                    <!-- Validation Errors-->
+                    @if ($errors->any())
+                    <div>
+                        <ul class="">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
-                </li>
-                <li>
-                    <!-- Password -->
-                    <div class="user_fill__password">
-                        <input id="password" class="" type="password" name="password" placeholder="Password" required>
-                    </div>
-                </li>
-                <div class="">
-                    <button class="">登録</button>
-                </div>
-            </ul>
-        </form>
+                    @endif
+                </ul>
+            </form>
+        </div>
     </div>
     @endsection
 </body>
 <!--@guest
     // ユーザーは認証されていない
     @endguest-->
-<!-- Validation Errors-->
- @if ($errors->any())
-    <div>
-        <div>
-            {{ __('エラーメッセージ') }}
-        </div>
-
-        <ul class="">
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif

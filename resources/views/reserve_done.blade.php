@@ -18,15 +18,13 @@
   <!-- Session Status -->
   <!-- Validation Errors-->
   @section('content_auth')
-  <div class="window_box">
-    <div>
-      <p>ご予約ありがとうございます</p>
-
-      <br>
-      <a href="/mypage" class="">マイページへ（未設定）</a>
+  <div class="window_box_container">
+    <div class="window_box">
+      <div class="window_box_done">
+        <p>ご予約ありがとうございます</p>
+        <p><a href="/mypage" class="bluetype">マイページに戻る</a></p>
+      </div>
     </div>
-    <br>
-
   </div>
   @endsection
 

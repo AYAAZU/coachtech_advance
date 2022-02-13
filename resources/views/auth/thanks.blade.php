@@ -16,14 +16,14 @@
 
 <body>
   <!-- Session Status -->
-
-  <!-- Validation Errors-->
-
-
-  @section('content')
-  <div class="window_box">
-    <p>会員登録ありがとうございます</p>
-    <a href="{{ route('login') }}" class="">ログインする</a>
+  @section('content_auth')
+  <div class="window_box_container">
+    <div class="window_box">
+      <div class="window_box_done">
+        <p>会員登録ありがとうございます</p>
+        <p><a href="{{ route('login') }}" class="">ログインする</a></p>
+      </div>
+    </div>
   </div>
   @endsection
 </body>

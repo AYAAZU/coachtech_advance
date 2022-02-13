@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 
 class StoreReservationRequest extends FormRequest
@@ -14,7 +15,11 @@ class StoreReservationRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if (Auth::check()) {
+            // ユーザーはログイン済み
+            return true;
+        }
+        return false;
     }
 
     /**

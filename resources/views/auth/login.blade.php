@@ -16,44 +16,48 @@
 
 <body>
     <!-- Session Status -->
-
     <!-- Validation Errors-->
-
-
     @section('content_auth')
-    <div class="window_box">
-        <h2>Login</h2>
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-            <ul>
-                <li>
-                    <!-- Email Address -->
-                    <div class="user_fill__email">
-                        <input id="email" class="" type="email" name="email" placeholder="Email" required />
+    <div class="window_box_container">
+        <div class="window_box">
+            <h2>Login</h2>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <ul>
+                    <li>
+                        <!-- Email Address -->
+                        <div class="user_fill__email">
+                            <input id="email" class="" type="email" name="email" placeholder="Email" required />
+                        </div>
+                    </li>
+                    <li>
+                        <!-- Password -->
+                        <div class="user_fill__password">
+                            <input id="password" class="" type="password" name="password" placeholder="Password" autocomplete="new-password" required>
+                        </div>
+                    </li>
+                    <div class="for_button">
+                        <button class="bluetype">
+                            {{ __('Log in') }}
+                        </button>
                     </div>
-                </li>
-                <li>
-                    <!-- Password -->
-                    <div class="user_fill__password">
-                        <input id="password" class="" type="password" name="password" placeholder="Password" required>
+                    <!-- Validation Errors-->
+                    @if ($errors->any())
+                    <div>
+                        <ul class="">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
-                </li>
-                <div class="">
-                    <button class="">
-                        {{ __('Log in') }}
-                    </button>
-                </div>
-            </ul>
-        </form>
+                    @endif
+                </ul>
+            </form>
+        </div>
     </div>
     @endsection
 </body>
 
-<!--
-パスワードのインプットタグに下記は必要？
-autocomplete="new-password"
--->
 
 <!-- Remember Me 
                 <div class="block mt-4">

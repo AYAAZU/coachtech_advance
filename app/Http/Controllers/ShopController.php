@@ -10,10 +10,10 @@ use App\Models\User;
 use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Reservation;
+use App\Models\Favorite;
 use App\Http\Requests\StoreReservationRequest;
-/*use Carbon\Carbon;*/
 
-
+/*追加*/
 use App\Imports\ShopsImport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -26,7 +26,8 @@ class ShopController extends Controller
         $shops = Shop::all();
         $areas = Area::all();
         $genres = Genre::all();
-        return view('welcome', ['shops' => $shops, 'areas' => $areas, 'genres' => $genres]);
+        $favorites = Favorite::where('user_id', Auth::id());
+        return view('welcome', ['shops' => $shops, 'areas' => $areas, 'genres' => $genres, 'favorites' => $favorites]);
     }
     /*飲食店検索結果の表示*/
     public function serch(Request $request)
@@ -86,10 +87,46 @@ class ShopController extends Controller
 
         $rese_id = $request->rese_id;
         Reservation::find($rese_id)->delete();
+        return redirect('/mypage');
+    }
 
+    /*予約の変更（作成前）*/
+    public function rese_change(Request $request)
+    {
+        $rese_id = $request->rese_id;
+        $rese = Reservation::find($rese_id);
+        $change_start_datetime = $request->change_date . ' ' . $request->change_time;
+        $rese->number = $request->change_number;
+        $rese->start_datetime = $change_start_datetime;
+        $rese->save();
 
         return redirect('/mypage');
     }
+
+    /*お気に入りの追加・削除*/
+    public function favorite_add(Request $request){
+        $shop_id = $request->shop_id;
+        $user_id = Auth::id();
+        /*a*/
+        Favorite::create([
+            'user_id' => $user_id,
+            'shop_id' => $shop_id,
+        ]);
+
+        /*またはredirect('/');*/
+        return back();
+    }
+    public function favorite_del(Request $request)
+    {
+        $shop_id = $request->shop_id;
+        $user_id = Auth::id();
+
+        $favorite = Favorite::where('user_id', $user_id)
+        ->where('shop_id', $shop_id);
+        $favorite->delete();
+        return back();
+        /*またはredirect('/');*/
+        }
 
     /*以下、データのインポート*/
     public function index_import()
