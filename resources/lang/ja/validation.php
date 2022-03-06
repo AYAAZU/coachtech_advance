@@ -142,6 +142,21 @@ return [
         ],
     ],
 
+    'custom' => [
+        'date' => [
+            'after' => ':attributeには、明日以降の日付を指定してください。',
+        ],
+        'change_date' => [
+            'after' => ':attributeには、明日以降の日付を指定してください。',
+        ],
+        'time' => [
+            'date_format' => '不正な入力をしないでください',
+        ],
+        'number' => [
+            'integer' => '不正な入力をしないでください',
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | カスタムバリデーション属性名
@@ -153,6 +168,6 @@ return [
     |
     */
 
-    'attributes' => ['date' => '日付', 'time' =>'時刻', 'number' => '人数'],
+    'attributes' => ['date' => '日付', 'change_date' => '日付', 'time' =>'時刻', 'change_time' => '時刻', 'number' => '人数', 'change_number' => '人数',],
 
 ];

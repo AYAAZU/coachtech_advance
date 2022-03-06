@@ -1,4 +1,14 @@
 /**mypage**/
+
+/*レビュー投稿欄の表示・非表示*/
+const reviews = Array.from(document.getElementsByClassName("review"));
+reviews.forEach(function(target) {
+  target.addEventListener("click", function () {
+    target.nextElementSibling.classList.toggle("display_block");
+  } )
+})
+
+
 /*予約削除のコンファーム*/
 const rese_del_forms = Array.from(document.getElementsByClassName("rese_del_form"));
 rese_del_forms.forEach(function(target) {
@@ -11,26 +21,17 @@ rese_del_forms.forEach(function(target) {
   })
 })
 
-/*予約変更のコンファーム*/
-const rese_change_forms = Array.from(document.getElementsByClassName("rese_change_form"));
-rese_change_forms.forEach(function(target) {
-  target.addEventListener("submit", function(e) {
-    if (window.confirm("ご予約を変更してよろしいですか？")) {
-      window.alert("ご予約を変更しました。")
-    } else {
-      e.preventDefault();
-    }
-  })
-})
-
 /*予約変更エリアの表示・非表示*/
 const changes = Array.from(document.getElementsByClassName("change"));
-changes.forEach(function(change) {
-  change.addEventListener("click", function () {
-    change.nextElementSibling.classList.toggle("display_block");
-    change.firstChild.classList.toggle("display_block");
-    change.lastChild.classList.toggle("display_block");
-  })
+changes.forEach(function(target) {
+  target.addEventListener("click", function () {
+    /*エリア全体の表示・非表示*/
+    target.nextElementSibling.classList.toggle("display_block");
+    /*ボタン表示内容の変更*/
+    target.firstChild.classList.toggle("display_block");
+    target.firstChild.classList.toggle("display_none");
+    target.lastChild.classList.toggle("display_block");
+  } )
 })
 
 /**shop_detail mypage**/

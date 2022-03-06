@@ -12,14 +12,25 @@ class Reservation extends Model
     protected $guarded = [];
     protected $fillable = ['user_id','shop_id','number', 'start_datetime'];
 
-    /**モデルのリレーション　不要？？     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public function shop()
     {
         return $this->belongsTo(Shop::class);
+    }
+
+    public function review()
+    {
+        return $this->hasone(Review::class);
+    }
+
+    public function getDatetime()
+    {
+        $date = $this->start_datetime;
+        return date('Y-m-d H:i', strtotime($date));
     }
     public function getDate()
     {
@@ -30,6 +41,13 @@ class Reservation extends Model
     {
         $date = $this->start_datetime;
         return date('H:i', strtotime($date));
+    }
+
+    public function getName()
+    {
+        $user_id = $this->user_id;
+        $name = User::find($user_id)->name;
+        return $name;
     }
 
 }

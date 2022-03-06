@@ -4,22 +4,86 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Shop;
-use App\Models\User;
 use App\Models\Area;
 use App\Models\Genre;
-use App\Models\Reservation;
 use App\Models\Favorite;
-use App\Http\Requests\StoreReservationRequest;
+use App\Http\Requests\StoreShopReqest;
+use App\Http\Requests\UpdateShopReqest;
+use Illuminate\Support\Facades\Gate;
+
+/*いらないかも？*/
+use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+
+/*画像ファイル削除*/
+use Illuminate\Support\Facades\Storage;
 
 /*追加*/
 use App\Imports\ShopsImport;
+use App\Models\Review;
 use Maatwebsite\Excel\Facades\Excel;
 
 
 class ShopController extends Controller
 {
+    public function shop_data_create(StoreShopReqest $request)
+    {
+        /*ユーザーの認可　*/
+        Gate::authorize('isAdmin_shop');
+        /*パラメータ取得　*/
+        $name = $request->name;
+        $kana = $request->kana;
+        $area_id = $request->area_id;
+        $genre_id = $request->genre_id;
+        $info = $request->info;
+        $admin_user_id = Auth::id();
+
+        /*店舗情報の新規作成　*/
+        Shop::create([
+            'name' => $name,
+            'kana' => $kana,
+            'area_id' => $area_id,
+            'genre_id' => $genre_id,
+            'info' => $info,
+            'admin_user_id' => $admin_user_id,
+        ]);
+
+        return redirect('/adminshop');
+    }
+
+    public function shop_data_update(UpdateShopReqest $request)
+    {
+        /*ユーザーの認可　*/
+        Gate::authorize('isAdmin_shop');
+        
+        $shop = Shop::where('admin_user_id', Auth::id())->first();
+        $form = $request->all();
+        unset($form['_token']);
+        /*店舗情報の更新　*/
+        $shop->update($form);
+
+        return redirect('/adminshop');
+    }
+
+
+    public function shop_image_add(Request $request)
+    {
+        /*ユーザーの認可　*/
+        Gate::authorize('isAdmin_shop');
+        $shop = Shop::where('admin_user_id', Auth::id())->first();
+        if ($shop->image != null) {
+            Storage::delete('public/shop_image/' . $shop->image);
+        }
+        /*店舗写真をストレージへ保存　*/
+        $image_path = $request->file('image')->storeAs('public/shop_image', $shop->id);
+        /*店舗写真のファイル名をデータベースへ保存*/
+        $shop->image = basename($image_path);
+        $shop->save();
+
+        return redirect('/adminshop');
+    }
+
     /*飲食店一覧の表示*/
     public function index()
     {
@@ -27,81 +91,29 @@ class ShopController extends Controller
         $areas = Area::all();
         $genres = Genre::all();
         $favorites = Favorite::where('user_id', Auth::id());
+
+        /*評価の表示
+        $my_stars =*/
+
         return view('welcome', ['shops' => $shops, 'areas' => $areas, 'genres' => $genres, 'favorites' => $favorites]);
     }
-    /*飲食店検索結果の表示*/
+
+    /*飲食店検索結果の表示
     public function serch(Request $request)
     {
         $area_id = Area::where('name', $request->area_name);
         $shops = Shop::where('area_id', $area_id)->all();
         return view('welcome', ['shops' => $shops]);
-    }
+    }*/
 
     /*飲食店の詳細*/
     public function shop_detail($shop_id)
     {
         $shop = Shop::where('id', $shop_id)->first();
-        $dt_reserved = Reservation::where('shop_id', $shop_id)->get();
-        $dt_reserved_start = Reservation::where('shop_id', $shop_id)->get();
-        return view('shop_detail', ['shop' => $shop, 'dt_reserved' => $dt_reserved]);
+        return view('shop_detail', ['shop' => $shop,]);
     }
 
-    /*予約の追加（作成前）*/
-    public function rese_add(StoreReservationRequest $request)
-    {
-        /*all取得し、認証中ユーザーのIDと日時を追加*/
-        /*$rese_all = $request->all();
-        /*　"_token"削除は必要？？　*/
-        /*unset($rese_all['_token']);
-        /*$user_id = Auth::id();
-        /*$rese_all['user_id'] = $user_id;
-        /*$rese_all['start_datetime'] = $request->date . ' ' . $request->time;*/
 
-    
-        /*dd($rese_all);*/
-
-        // /*　"_token"削除？？　*/
-        /*array:"_token","shop_id","date","time","number"
-        +'user_id','datetime'*/
-
-        /*認証中ユーザーのID、飲食店のID、予約日時、人数を取得*/
-        $shop_id = $request->shop_id;
-        $user_id = Auth::id();
-        $number = $request->number;
-        $start_datetime = $request->date . ' ' . $request->time;
-        /*予約の追加*/
-        Reservation::create([
-            'user_id' => $user_id,
-            'shop_id' => $shop_id,
-            'number' => $number,
-            'start_datetime' => $start_datetime
-        ]);
-
-        return view('reserve_done');
-    }
-
-    /*予約の削除（確認前）*/
-    public function rese_del(Request $request)
-    {
-        /*予約の削除 デリート？ソフトデリート？*/
-
-        $rese_id = $request->rese_id;
-        Reservation::find($rese_id)->delete();
-        return redirect('/mypage');
-    }
-
-    /*予約の変更（作成前）*/
-    public function rese_change(Request $request)
-    {
-        $rese_id = $request->rese_id;
-        $rese = Reservation::find($rese_id);
-        $change_start_datetime = $request->change_date . ' ' . $request->change_time;
-        $rese->number = $request->change_number;
-        $rese->start_datetime = $change_start_datetime;
-        $rese->save();
-
-        return redirect('/mypage');
-    }
 
     /*お気に入りの追加・削除*/
     public function favorite_add(Request $request){
@@ -113,7 +125,6 @@ class ShopController extends Controller
             'shop_id' => $shop_id,
         ]);
 
-        /*またはredirect('/');*/
         return back();
     }
     public function favorite_del(Request $request)
@@ -125,8 +136,8 @@ class ShopController extends Controller
         ->where('shop_id', $shop_id);
         $favorite->delete();
         return back();
-        /*またはredirect('/');*/
         }
+
 
     /*以下、データのインポート*/
     public function index_import()

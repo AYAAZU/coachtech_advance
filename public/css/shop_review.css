@@ -1,0 +1,19 @@
+.left_part {
+  width: 80%;
+}
+
+.shop_reviews {
+  width: 80%;
+  margin: 5px 0;
+  padding: 5px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.stars {
+  margin: 7px 0;
+}
+
+span.small {
+  font-size: 10px;
+}

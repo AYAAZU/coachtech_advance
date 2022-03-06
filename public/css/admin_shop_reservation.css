@@ -1,0 +1,64 @@
+.right_part {
+  width: 50%;
+}
+
+div.right_part {
+  margin-top: 110px;
+}
+
+.left_part {
+  width: 50%;
+}
+
+div.rese_list {
+  margin-bottom: 40px;
+}
+
+.rese_list_table {
+  border: 1px solid #ddd;
+}
+
+.rese_list_table th,
+.rese_list_table td {
+  text-align: center;
+  line-height: 25px;
+  padding: 0 10px;
+}
+
+.rese_list_table tr:nth-child(odd) {
+    background-color:  #ddd;
+}
+
+.email_button
+{
+  background-color: transparent;
+  border: none;
+}
+
+.email_button::before
+{
+  content: "\f0e0";
+  font-family: "Font Awesome 5 Free";
+  font-size: 1.5em;
+  font-weight: 900;
+}
+
+@media screen and (max-width: 768px) {
+
+  div.left_part {
+    margin-top: 60px;
+  }
+  .rese_card input,.rese_card select,.rese_card dl {
+    font-size: 10px;
+  }
+
+  .rese_list_table th,
+  .rese_list_table td {
+    padding: 0 2px;
+  }
+}
+
+
+
+
+

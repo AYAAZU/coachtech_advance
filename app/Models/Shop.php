@@ -17,6 +17,7 @@ class Shop extends Model
         'image',
         'start_time',
         'end_time',
+        'admin_user_id',
         'created_at',
         'updated_at',
     ];
@@ -55,6 +56,19 @@ class Shop extends Model
     {
         return $this->hasMany('App\Models\Favorite');
     }
+
+    /*Reviewとのリレーション*/
+    public function reviews()
+    {
+        return $this->hasManyThrough('App\Models\Review', 'App\Models\Reservation');
+    }
+
+    public function stars()
+    {
+        $stars = round($this->reviews->avg('stars'),1, PHP_ROUND_HALF_UP);
+        return $stars;
+    }
+
     /*（未使用）Favoriteからuser_idを取得*/
     public function getUserIdFromFavorites()
     {

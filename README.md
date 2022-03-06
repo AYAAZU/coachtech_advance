@@ -1,12 +1,3 @@
-<p align="center"><a href="" target="_blank"><img src="" width="400"></a></p>
-※バッチ未作成
-<p align="center">
-<a href=""><img src="" alt="Build Status"></a>
-<a href=""><img src="" alt="Total Downloads"></a>
-<a href=""><img src="" alt="Laravel Framework 8.79.0"></a>
-<a href=""><img src="" alt="License"></a>
-</p>
-
 ## About rese_matsuda
 
 rese_matsuda is a web application to make reservations for restaurants.
@@ -51,13 +42,6 @@ rese_matsuda let restaurateurs manege reservations easily.
 - Restaurateurs can check reservations on the management portal.
 - Restaurateurs can make or update information about Restaurants.
 - The service manager can add restaurateurs on the admin settings.
-
-## operation confirmation?? or Application Development Environment OS??
-
-(confirmed the operation on )windows10
-
-## （Sample）
-## （Contributing）
 
 ## Author
 

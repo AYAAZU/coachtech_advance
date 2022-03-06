@@ -11,8 +11,20 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+    /*$this->call(ShopTableSeeder::class);*/
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        
+        $this->call(FlightSeeder::class);
+        $this->call(AreaTableSeeder::class);
+        $this->call(GenreTableSeeder::class);
+
+        $this->call(*TableSeeder::class);
+        $this->call(*TableSeeder::class);
+        $this->call(*TableSeeder::class);
+        $this->call(*TableSeeder::class);
+        $this->call(*TableSeeder::class);
+        $this->call(*TableSeeder::class);
+
     }
 }

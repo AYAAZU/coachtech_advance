@@ -1,0 +1,37 @@
+/*幅*/
+.right_part {
+  width: 50%;
+}
+
+.left_part {
+  width: 50%;
+}
+
+.register_box h2,
+.rese_list h2 {
+  margin-bottom: 15px;
+}
+
+.register_box form {
+  width: 80%;
+  min-width: 200px;
+  margin-bottom: 30px;
+}
+
+.register_box form ul li div input,
+.register_box form ul li div select,
+.register_box form ul li div textarea {
+  width: 100%;
+  border: none;
+  margin-bottom: 2px;
+}
+
+.rese_list_table th,
+.rese_list_table tr {
+  width: 25%;
+  text-align: center;
+}
+
+div.shop_image img {
+  width: 150px;
+}

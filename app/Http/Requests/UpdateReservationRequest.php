@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateReservationRequest extends FormRequest
 {
@@ -13,6 +14,10 @@ class UpdateReservationRequest extends FormRequest
      */
     public function authorize()
     {
+        if (Auth::check()) {
+            // ユーザーはログイン済み
+            return true;
+        }
         return false;
     }
 
@@ -24,7 +29,9 @@ class UpdateReservationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'change_date' => 'required|date|after:today',
+            'change_time' => 'required|date_format:H:i',
+            'change_number' => 'required|integer|min:1|max:10',
         ];
     }
 }

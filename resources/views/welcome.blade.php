@@ -4,23 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Rese</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- fontawesome旧バージョン※検索用虫眼鏡マークのため -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Styles -->
+    <!-- Style-->
+    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     @extends('layouts.default')
 </head>
-<style>
-    /*セレクトタグのデザイン用クラスのwidth、他は親レイアウトで設定*/
-    div.select_mark {
-        width: 100px;
-    }
-</style>
 
 <body>
     @section('content')
@@ -59,10 +49,53 @@
                         <span class="for_serch_kana hidden_tag">{{$shop->kana}}</span>
                     </div>
                     <!--以下、表示-->
-                    <div class="shop_card_image"><img src="{{$shop->image}}" alt="shop image"></div>
+                    <div class="shop_card_image">
+                        @if( $shop->id < 21 ) <img src="{{$shop->image}}" alt="shop image">
+                            @else
+                            <img src="/storage/shop_image/{{$shop->image}}" alt="shop image">
+                            @endif
+                    </div>
                     <div class="shop_card_content">
-                        <h3>{{$shop->name}}</h3>
-                        <p><span>#{{$shop->getArea()}}</span><span>#{{$shop->getGenre()}}</span></p>
+                        <div class="justify_content_for_card">
+                            <h3>{{$shop->name}}</h3>
+                            <!--5段階評価-->
+                            <div class="reviews">
+                                @if(1 <= $shop->stars())
+                                    <span>{{$shop->stars()}}</span>
+                                    @endif
+                                    @if(1 == $shop->stars())
+                                    <span class="star"></span>
+                                    @elseif(1 < $shop->stars() && $shop->stars()< 2) <span class="star"></span><span class="star_half"></span>
+                                            @elseif($shop->stars() == 2)
+                                            <span class="star"></span><span class="star"></span>
+                                            @elseif(2 < $shop->stars() && $shop->stars()< 3) <span class="star"></span><span class="star"></span><span class="star_half"></span>
+                                                    @elseif(3 == $shop->stars())
+                                                    <span class="star"></span><span class="star"></span><span class="star"></span>
+                                                    @elseif(3 < $shop->stars() && $shop->stars()< 4) <span class="star"></span><span class="star"></span><span class="star"></span><span class="star_half"></span>
+                                                            @elseif(4 == $shop->stars())
+                                                            </span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+                                                            @elseif(4 < $shop->stars()&& $shop->stars()< 5) <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star_half"></span>
+                                                                    @elseif(5 == $shop->stars())
+                                                                    <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+                                                                    @else
+                                                                    <!--表示なし-->
+                                                                    @endif
+                            </div>
+                        </div>
+
+
+                        <div class="justify_content_for_card">
+                            <p><span>#{{$shop->getArea()}}</span><span>#{{$shop->getGenre()}}</span></p>
+                            <!--レビューへのリンク-->
+                            @if(1 <= $shop->stars())
+                                <form action="/review/show/{{$shop->id}}" method="get">
+                                    <input type="hidden" name="shop_id" value="{{$shop->id}}">
+                                    <button type="submit" class="round">口コミを見る</button>
+                                </form>
+                                @else
+                                <p class="no_review">口コミは<br>ありません</p>
+                                @endif
+                        </div>
                         <div class="forms">
                             <!--飲食店詳細ページへのリンク-->
                             <form action="/detail/{{$shop->id}}" method="get">

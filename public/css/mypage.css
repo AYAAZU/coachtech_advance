@@ -1,0 +1,135 @@
+/*レイアウト　幅*/
+
+div.right_part {
+  width: 60%;
+  margin-right: 0px;
+}
+
+.left_part {
+  width: 40%;
+}
+
+/*レビュー*/
+.review_form {
+  width: 100%;
+}
+
+button.round {
+  
+}
+
+/*お気に入り表示*/
+.favorite_part h2 {
+  margin: 10px;
+}
+
+.favorite_part_content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*予約表示*/
+div.reselist {
+  width: 80%;
+  max-width: 480px;
+  min-width: 150px;
+  background: blue;
+  box-shadow: 3px 3px 2px grey;
+  border-radius: 7px;
+  padding: 20px;
+  margin: 5px 0px;
+  box-sizing: border-box;
+  color: white;
+}
+
+.reselist_head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+dl.reselist_dl {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px 0 5px 5px;
+}
+
+.reselist_dl dt {
+  width: 40%;
+  height: 28px;
+  margin-bottom: 3px;
+}
+
+.reselist_dl dd {
+  width: 60%;
+  height: 28px;
+}
+
+.reselist_dl dd input,
+.reselist_dl dd select {
+  height: 28px;
+  border-radius: 5px;
+}
+
+.reselist h4::before {
+  content: "\f017";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: white;
+  cursor: pointer;
+}
+
+div.rese_del_button button {
+  background-color: transparent;
+  border: none;
+}
+
+div.rese_del_button ::after {
+  content: "\f057";
+  font-family: "Font Awesome 5 Free";
+  font-size: 1.5em;
+  font-weight: 400;
+  color: white;
+  cursor: pointer;
+}
+
+.reselist p {
+  padding: 5px;
+}
+
+.reselist p a {
+  color: white;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.reselist button.change {
+  width: 100px;
+  background-color: white;
+  border-radius: 10px;
+  border: none;
+  margin: 3px 0;
+}
+
+.change_area {
+  background-color: green;
+}
+
+div.qr {
+  margin: 3px 0px;
+}
+
+/*セレクトタグのデザイン用クラス、width以外はindex.cssで設定*/
+div.select_mark {
+  width: 60%;
+}
+
+@media screen and (max-width: 768px) {
+
+  /*お気に入り表示*/
+
+  .favorite_part_content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

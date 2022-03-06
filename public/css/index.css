@@ -1,443 +1,554 @@
 @charset "utf-8";
-/**フォント**/
-    body {
-      font-family: 'Nunito', sans-serif;
-    }
-/**共通**/
-    /*背景、メニュー関連（全画面表示）*/
-    
-    html,
-    body {
-      font-family: 'Nunito', sans-serif;
-      min-width: 768px;
-      height: 100%;
-    }
 
-    .background {
-      min-width: 768px;
-      height: 100%;
-      /*?????????;
-      min-height: 100%;*/
-      background-color: rgb(240, 240, 240);
-      z-index: 0;
-    }
-
-    /*全画面共通*/
-    a {
-      text-decoration: none;
-      color: blue
-    }
-
-    h2 {
-      font-size: 24px;
-    }
-
-    h3 {
-      font-size: 20px;
-    }
-
-    p {
-      font-size: 14px;
-    }
-
-    .hidden_tag {
-      display: none;
-    }
-
-    button {
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    input,select {
-      padding-left: 3px;
-    }
-
-    .display_none {
-      display: none;
-    }
-
-    button.bluetype,
-    a.bluetype {
-      background-color: rgb(53, 96, 246);
-      border: none;
-      border-radius: 5px;
-      color: white;
-      padding: 5px;
-    }
-
-    /*登録画面、ログイン共通*/
-    .window_box_container {
-      width: 100%;
-      height: 100%;
-      display: flex;
-    }
-
-    div.window_box {
-      width: 420px;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 2px 2px 5px grey;
-      margin: auto;
-      letter-spacing: 1px;
-    }
-
-    .window_box h2 {
-      padding: 0px 10px;
-      width: 100%;
-      height: 50px;
-      line-height: 50px;
-      background-color: rgb(53, 96, 246);
-      border-radius: 10px 10px 0px 0px;
-      box-sizing: border-box;
-      color: white;
-      font-weight: 400;
-    }
-
-    .window_box_done p {
-      margin: auto;
-      text-align: center;
-      line-height: 60px;
-      font-weight: 600;
-    }
-
-    .window_box ul {
-      padding: 10px 30px 30px;
-    }
-
-    .window_box li {
-      margin: 20px 0px;
-    }
-
-    .window_box input {
-      border: none;
-      border-bottom: 1px solid grey;
-      width: 350px;
-    }
-
-    .window_box ul div {
-      display: flex;
-      justify-content: right;
-    }
-
-    .user_fill__name::before {
-      content: "\f007";
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-    }
-
-    .user_fill__email::before {
-      content: "\f0e0";
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-    }
-
-    .user_fill__password::before {
-      content: "\f023";
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-    }
-
-    /*飲食店一覧、飲食店詳細、マイページの画面レイアウト*/
-    .header_part {
-      width: 100%;
-      display: flex;
-      justify-content: right;
-    }
-
-    .main {
-      width: 100%;
-      min-height: 100%;
-      background-color: rgb(240, 240, 240);
-      display: flex;
-    }
-
-    .right_part {
-      margin-top: 30px;
-      margin-right: 80px;
-      z-index: 10;
-    }
-
-    .left_part {
-      margin-top: 100px;
-      margin-left: 80px;
-      margin-right: 80px;
-    }
-
-    .shop_cards_container {
-      width: 100%;
-      margin-top: 100px;
-      margin-left: 80px;
-      margin-right: 60px;
-    }
-
-    /*飲食店一覧・詳細、マイページ画面のお気に入り機能*/
-    .favorite_mark,
-    .not_favorite_mark {
-      border: none;
-      background-color: transparent;
-      display: inline-block;
-      position: relative;
-    }
-
-    .favorite_mark::before {
-      content: "\f004";
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-      font-size: 1.5em;
-      color: red;
-      cursor: pointer;
-    }
-
-    .not_favorite_mark::before {
-      content: "\f004";
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-      font-size: 1.5em;
-      color: rgb(238, 238, 238);
-      cursor: pointer;
-    }
-
-    .favorite_expl {
-      display: none;
-      position: absolute;
-      font-size: 10px;
-      bottom: 10px;
-      right: 45px;
-    }
-
-    button.favorite_mark:hover+.favorite_expl,
-    button.not_favorite_mark:hover+.favorite_expl {
-      display: inline-block;
-    }
-
-    /*セレクトタグのデザイン用クラス、widthは各シートで設定*/
-    div.select_mark {
-      position: relative;
-      padding: 0;
-    }
-
-    .select_mark select {
-      appearance: none;
-      width: 100%;
-      position: relative;
-    }
-
-    /*セレクトタグのデザイン*/
-    div.select_mark::after {
-      font-family: "Font Awesome 5 Free";
-      content: '\f078';
-      font-weight: 900;
-      pointer-events: none;
-      position: absolute;
-      display: block;
-      color: rgb(200, 200, 200);
-      right: 5px;
-      top: 9px;
-    }
-
-    /*飲食店一覧・詳細、マイページ画面のショップカード*/
-    .shop_cards {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: left;
-      z-index: 0;
-    }
-
-    .shop_card {
-      width: 20%;
-      min-width: 240px;
-      min-height: 240px;
-      border-radius: 8px;
-      box-shadow: 3px 3px gray;
-      background-color: white;
-      margin-right: 15px;
-      margin-bottom: 15px;
-      position: relative;
-      overflow: hidden
-    }
-
-    .shop_card_image {
-      width: 100%;
-      position: absolute;
-      top: -30px;
-    }
-
-    .shop_card_image img {
-      width: 100%;
-      border-radius: 8px 8px 0px 0px;
-    }
-
-    .shop_card_content {
-      width: 100%;
-      background-color: white;
-      padding: 20px;
-      position: absolute;
-      top: 120px;
-    }
-
-    .shop_card_content p {
-      margin-bottom: 20px;
-    }
-
-    div.shop_card_content div.forms {
-      display: flex;
-      justify-content: space-between;
-      padding-right: 30px;
-    }
-
-/**飲食店一覧**/
-/*検索バー*/
-div.shop_serch {
-    width: 50%;
-    position: relative;
-}
-
-.shop_serch form {
-    width: 380px;
-    height: 38px;
-    background-color: white;
-    border-radius: 4px;
-    box-shadow: 3px 3px 2px grey;
-    position: fixed;
-    top: 10px;
-    display: flex;
-}
-
-.shop_serch select,
-.shop_serch input {
-    background-color: transparent;
-    border: none;
-    height: 24px;
-    margin: 6px auto 6px 0;
-    font-size: 14px;
-    display: inline-block;
-    box-sizing: border-box;
-    padding-left: 10px;
-}
-
-.shop_serch select {
-    border-right: 1px solid goldenrod;
-}
-
-.shop_serch input {
-    width: 180px;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-}
-
-/*飲食店一覧・飲食店詳細、マイページのショップカード*/
-
-div.shop_detail_card {
-    width: 80%;
-}
-
-.shop_detail_card_image img {
-    width: 100%;
-}
-
-.shop_detail_card p {
-    margin: 10px 0px;
-}
-
-/*店舗情報パート*/
-a.return {
-    position: relative;
-    margin-left: 25px;
-}
-
-a.return::before {
-  font-family: "Font Awesome 5 Free";
-  content: '\f191';
-  font-weight: 400;
-  font-size: 1.5em;
-  background-color: white;
-  color: black;
-  position: absolute;
-  top: 40%;
-  left: -25px;
-  transform: translate(0, -50%);
-}
-
-/*予約パート*/
-div.rese_card {
-  min-width: 300px;
-  width: 70%;
-  min-height: 300px;
-  background: Blue;
-  border-radius: 10px;
+/**メニュー他**/
+div.menu {
+  display: inline-block;
+  background-color: rgb(53, 96, 246);
+  box-shadow: 3px 3px 2px grey;
+  border-radius: 7px;
+  padding: 5px;
   color: white;
+  width: 36px;
+  height: 32px;
+  cursor: pointer;
+  position: fixed;
+  left: 80px;
+  top: 20px;
+  z-index: 200;
 }
 
-.rese_card form {
-  width: 100%;
-}
-
-.rese_card select,
-input {
-  display: block;
-  height: 28px;
-  box-sizing: content-box;
+.menu__line--top,
+.menu__line--middle,
+.menu__line--bottom {
+  display: inline-block;
+  height: 1px;
+  background-color: white;
   border: none;
-  border-radius: 3px;
+  position: absolute;
+  transition: 0.5s;
+  margin: 5px;
+}
+
+.menu__line--top {
+  top: 6px;
+  width: 25%;
+}
+
+.menu__line--middle {
+  top: 17px;
+  width: 55%;
+}
+
+.menu__line--bottom {
+  bottom: 6px;
+  width: 10%;
+}
+
+.menu.open span:nth-of-type(1) {
+  top: 14px;
+  transform: rotate(45deg);
+  width: 100%;
+  position: absolute;
+  left: -5px;
+}
+
+.menu.open span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.menu.open span:nth-of-type(3) {
+  top: 14px;
+  transform: rotate(-45deg);
+  width: 100%;
+  position: absolute;
+  left: -5px;
+}
+
+.menu__rese {
+  position: absolute;
+  left: 60px;
+  display: inline-block;
+  color: rgb(53, 96, 246);
+  font-size: 36px;
+  font-weight: bolder;
+}
+
+
+/*ナビゲーション画面*/
+.nav {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: -100%;
+  z-index: 100;
+  background: white;
+  transition: .7s;
+  text-align: center;
+}
+
+.nav ul {
+  padding-top: 80px;
+  font-size: 24px;
+}
+
+.nav ul li {
+  list-style-type: none;
+  margin-top: 50px;
+}
+
+.in {
+  transform: translateX(100%);
+}
+
+    @media screen and (max-width: 768px) {
+      div.menu {
+        box-shadow: 3px 3px 2px grey;
+        border-radius: 7px;
+        padding: 5px;
+        width: 36px;
+        height: 32px;
+        left: 20px;
+        top: 20px;
+      }
+
+      div.menu {
+      box-shadow: 3px 3px 2px grey;
+      border-radius: 3px;
+      padding: 3px;
+      color: white;
+      width: 18px;
+      height: 16px;
+      cursor: pointer;
+      position: fixed;
+      left: 10px;
+      top: 10px;
+    }
+
+    .menu__line--top,
+    .menu__line--middle,
+    .menu__line--bottom {
+      transition: 0.5s;
+      margin: 2px;
+    }
+
+    .menu__line--top {
+      top: 3px;
+      width: 25%;
+    }
+
+    .menu__line--middle {
+      top: 8px;
+      width: 55%;
+    }
+
+    .menu__line--bottom {
+      bottom: 3px;
+      width: 10%;
+    }
+
+    .menu.open span:nth-of-type(1) {
+      top: 9px;
+      left: -1px;
+    }
+
+    .menu.open span:nth-of-type(3) {
+      top: 9px;
+      left: -1px;
+    }
+
+    .menu__rese {
+      position: absolute;
+      left: 35px;
+      display: inline-block;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    }
+
+/*背景、メニュー関連（全画面表示）*/
+html,
+body {
+  font-family: 'Nunito', sans-serif;
+  height: 100%;
+}
+
+.background {
+  height: 100%;
+  background-color: rgb(240, 240, 240);
+  z-index: 0;
+}
+
+/*全画面共通*/
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 14px;
+}
+
+.hidden_tag {
+  display: none;
+}
+
+button {
+  cursor: pointer;
   font-size: 12px;
+}
+
+input,select {
   padding-left: 3px;
 }
 
-.rese_card input {
-  margin: 20px;
+.display_none {
+  display: none;
 }
 
-dl.rese_confirmation {
-  width: 80%;
-  padding: 20px;
-  background: RoyalBlue;
+.display_block {
+  display: block;
+}
+
+button.bluetype,
+a.bluetype {
+  background-color: rgb(53, 96, 246);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 5px;
+}
+
+.round {
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: SkyBlue;
+    padding: 1px 7px;
+    margin-bottom: 1px;
+}
+
+.star::before {
+    content: "\f005";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 1em;
+    color: Gold;
+}
+
+.star_half::before {
+    content: "\f089";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 1em;
+    color: Gold;
+}
+
+/*登録画面、ログイン共通*/
+.window_box_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+div.window_box {
+  width: 95%;
+  min-width: 200px;
+  max-width: 420px;
+  background-color: white;
   border-radius: 10px;
-  margin: 0px 10px 40px 10px;
+  box-shadow: 2px 2px 5px grey;
+  margin: auto;
+  letter-spacing: 1px;
+}
+
+.window_box h2 {
+  padding: 0px 10px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background-color: rgb(53, 96, 246);
+  border-radius: 10px 10px 0px 0px;
+  box-sizing: border-box;
+  color: white;
+  font-weight: 400;
+}
+
+.window_box_done p {
+  margin: auto;
+  text-align: center;
+  line-height: 60px;
+  font-weight: 600;
+}
+
+.window_box ul {
+  padding: 10px 30px 30px;
+}
+
+.window_box li {
+  margin: 20px 0px;
+}
+
+.window_box input {
+  border: none;
+  border-bottom: 1px solid grey;
+  width: 350px;
+}
+
+.window_box ul div {
+  display: flex;
+  justify-content: right;
+}
+
+.user_fill__name::before {
+  content: "\f007";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+.user_fill__email::before {
+  content: "\f0e0";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+.user_fill__password::before {
+  content: "\f023";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+/*ページのレイアウト*/
+.header_part {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+
+.main {
+  width: 100%;
+  min-height: 100%;
+  background-color: rgb(240, 240, 240);
+  display: flex;
+}
+
+.right_part {
+  margin-top: 30px;
+  margin-right: 80px;
+  z-index: 10;
+}
+
+.left_part {
+  margin-top: 100px;
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+@media screen and (max-width: 768px) {
+  .background {
+    height: 100%;
+    background-color: rgb(240, 240, 240);
+    z-index: 0;
+  }
+  .header_part {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+  }
+
+  .main {
+    width: 100%;
+    min-height: 100%;
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .right_part {
+    width: 80%;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-left: 20px;
+    z-index: 10;
+    box-sizing: border-box;
+  }
+
+  .left_part {
+    width: 80%;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    box-sizing: border-box;
+  }
+
+  h2 {
+    font-size: 14px;
+  }
+
+  h3,tr {
+    font-size: 12px;
+  }
+
+  p,th {
+    font-size: 10px;
+  }
+}
+
+/*セレクトタグのデザイン用クラス、widthは各シートで設定*/
+div.select_mark {
+  position: relative;
+  padding: 0;
+}
+
+.select_mark select {
+  appearance: none;
+  width: 100%;
+  position: relative;
+}
+
+/*セレクトタグのデザイン*/
+div.select_mark::after {
+  font-family: "Font Awesome 5 Free";
+  content: '\f078';
+  font-weight: 900;
+  pointer-events: none;
+  position: absolute;
+  display: block;
+  color: rgb(200, 200, 200);
+  right: 5px;
+  top: 9px;
+}
+
+/*飲食店一覧・詳細、マイページ画面のショップカード*/
+.shop_cards_container {
+  width: 100%;
+  padding-top: 100px;
+  box-sizing: border-box;
+  padding-left: 50px;
+  padding-right: 30px;
+}
+
+.shop_cards {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: left;
+  z-index: 0;
 }
 
-.rese_confirmation dt {
-  width: 30%;
-  line-height: 30px;
+.shop_card {
+  width: 240px;
+  min-height: 240px;
+  border-radius: 8px;
+  box-shadow: 3px 3px gray;
+  background-color: white;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  overflow: hidden
 }
 
-.rese_confirmation dd {
-  width: 70%;
-  line-height: 30px;
+.shop_card_image {
+  width: 100%;
+  position: absolute;
+  top: -30px;
 }
 
-dl.rese_confirmation input {
-  background: transparent;
-  border: none;
+.shop_card_image img {
+  width: 100%;
+  border-radius: 8px 8px 0px 0px;
 }
 
-.rese_card h3 {
-  padding-top: 30px;
-  margin: 20px;
+.shop_card_content {
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  position: absolute;
+  top: 120px;
 }
 
-.rese_card p {
-  padding: 50px;
+.shop_card_content p {
+  margin-bottom: 20px;
+  font-size: 12px;
 }
 
-.rese_card p a {
-  color: white;
-  text-decoration: underline;
+div.shop_card_content div.forms {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 30px;
+}
+
+.font_bigger {
+  font-size: 16px;
   font-weight: bold;
 }
 
-.rese_card button {
-  width: 100%;
-  display: block;
-  background-color: MediumBlue;
-  border-radius: 0px 0px 10px 10px;
+/*お気に入り機能（飲食店一覧・詳細、マイページ画面　共通）*/
+.favorite_mark,
+.not_favorite_mark {
   border: none;
-  margin: 0;
-  padding: 5px;
-  font-size: 14px;
-  color: white;
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
 }
+
+.favorite_mark::before {
+  content: "\f004";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 1.5em;
+  color: red;
+  cursor: pointer;
+}
+
+.not_favorite_mark::before {
+  content: "\f004";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 1.5em;
+  color: rgb(238, 238, 238);
+  cursor: pointer;
+}
+
+.favorite_expl {
+  display: none;
+  position: absolute;
+  font-size: 10px;
+  bottom: 10px;
+  right: 45px;
+}
+
+button.favorite_mark:hover+.favorite_expl,
+button.not_favorite_mark:hover+.favorite_expl {
+  display: inline-block;
+}
+
+/**飲食店一覧**/
+
+
+@media screen and (max-width: 768px) {
+  .shop_cards_container {
+    width: 100%;
+    margin-top: 20px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .shop_card {
+    max-width: 240px;
+    min-width: 150px;
+  }
+
+}
+

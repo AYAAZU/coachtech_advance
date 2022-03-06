@@ -2,144 +2,10 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Rese</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
+  <title>Mypage</title>
+  <!-- Style -->
+  <link rel="stylesheet" href="{{ asset('css/mypage.css') }}">
   @extends('layouts.default')
-  <style>
-    /*レイアウト　幅*/
-    .right_part {
-      width: 60%;
-    }
-
-    .left_part {
-      width: 40%;
-    }
-
-    /*お気に入り表示*/
-    .favorite_part h2 {
-      margin: 10px;
-    }
-
-    .favorite_part_content {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    /*予約表示*/
-    div.reselist {
-      width: 80%;
-      min-width: 240px;
-      background: blue;
-      box-shadow: 3px 3px 2px grey;
-      border-radius: 7px;
-      padding: 20px;
-      margin: 5px 0px;
-      color: white;
-    }
-
-    .reselist_head {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 5px;
-    }
-
-    /*.reselist input,
-    select {
-      display: block;
-    }*/
-
-    dl.reselist_dl {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 5px 0 5px 5px;
-    }
-
-    .reselist_dl dt {
-      width: 40%;
-      height: 28px;
-      margin-bottom: 3px;
-    }
-
-    .reselist_dl dd {
-      width: 60%;
-      height: 28px;
-    }
-
-    .reselist_dl dd input,
-    .reselist_dl dd select {
-      height: 28px;
-      border-radius: 5px;
-    }
-
-    .reselist h4::before {
-      content: "\f017";
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-      color: white;
-      cursor: pointer;
-    }
-
-    div.rese_del_button button {
-      background-color: transparent;
-      border: none;
-    }
-
-    div.rese_del_button ::after {
-      content: "\f057";
-      font-family: "Font Awesome 5 Free";
-      font-size: 1.5em;
-      font-weight: 400;
-      color: white;
-      cursor: pointer;
-    }
-
-    .reselist p {
-      padding: 5px;
-    }
-
-    .reselist p a {
-      color: white;
-      text-decoration: underline;
-      font-weight: bold;
-    }
-
-    .reselist button.change {
-      width: 100px;
-      background-color: white;
-      border-radius: 10px;
-      border: none;
-      margin: 3px 0;
-    }
-
-    .reselist button span {
-      display: none;
-    }
-
-    div.change_area {
-      background-color: green;
-      display: none;
-    }
-
-    div.display_block {
-      display: block;
-    }
-
-    .reselist button span.display_block {
-      display: block;
-    }
-
-    /*セレクトタグのデザイン用クラス、width以外はindex.cssで設定*/
-    div.select_mark {
-      width: 60%;
-    }
-  </style>
 </head>
 
 <body>
@@ -147,10 +13,45 @@
   @auth
   <div class="main">
     <div class="left_part">
-      <h3>予約状況</h3>
+      <!--口コミの投稿-->
+      @if($reservations_visited->count() >= 1)
+      <h3>■口コミの投稿</h3>
+      <p>下記店舗の口コミを投稿できます。店名をクリックしてください。</p>
+      <br>
+      <ul>
+        @foreach($reservations_visited as $reservation_visited)
+        <li>
+          <button class="review round">{{$reservation_visited->shop->name}}</button>
+          <form action="/review/create" method="post" class="review_form display_none">
+            @csrf
+            <input type="hidden" name="reservation_id" value="{{$reservation_visited->id}}" required>
+            <p>・5段階で評価してください（必須）</p>
+            <select name="stars" id="">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select><br><br>
+            <p>・感想を書いてください（200文字まで）</p>
+            <textarea name="comment" id="" cols="20" rows="8" maxlength="200"></textarea><br>
+            <button type="submit">評価する</button>
+          </form>
+        </li>
+        @endforeach
+      </ul><br>
+      @endif
+
+      <h3>■予約状況</h3>
       <!--予約情報の表示-->
-      @foreach($my_reservations as $my_reservation)
+      <div>
+        @foreach ($errors->all() as $error)
+        <li class="alert">{{$error}}</li>
+        @endforeach
+      </div>
+      @foreach($reservations as $reservation)
       <div class="reselist">
+
         <form action="/reservation/del" method="post" name="rese_form" class="rese_del_form">
           @csrf
           <div class="reselist_head">
@@ -160,30 +61,37 @@
           <!--予約削除-->
           <dl class="rese_del reselist_dl">
             <dt>Shop</dt>
-            <dd>{{$my_reservation->shop->getShopName()}}</dd>
+            <dd>{{$reservation->shop->getShopName()}}</dd>
             <dt>Date</dt>
-            <dd>{{$my_reservation->getDate()}}</dd>
+            <dd>{{$reservation->getDate()}}</dd>
             <dt>Time</dt>
-            <dd>{{$my_reservation->getTime()}}</dd>
+            <dd>{{$reservation->getTime()}}</dd>
             <dt>Number</dt>
-            <dd>{{$my_reservation->number}}人</dd>
+            <dd>{{$reservation->number}}人</dd>
           </dl>
-          <input type="hidden" name="rese_id" value="{{$my_reservation->id}}">
+          <input type="hidden" name="rese_id" value="{{$reservation->id}}">
         </form>
+        <!--QRコード-->
+        <div class="qr">
+          <form action="/generate-qrcode/{{$reservation->id}}" method="get">
+            <input type="hidden" name="reservation_id" value="{{$reservation->id}}">
+            <button>QRコード表示</button>
+          </form>
+        </div>
         <!--予約変更-->
-        <button type="button" class="change"><span class="display_block">予約の変更</span><span>閉じる</span></button>
-        <div class="change_area">
+        <button type="button" class="change"><span class="display_block">予約の変更</span><span class="display_none">閉じる</span></button>
+        <div class="change_area display_none">
           <p>変更後の日時および人数を選択してください</p>
           <form action="/reservation/change" method="post" class="rese_change_form">
             @csrf
-            <input type="hidden" name="rese_id" value="{{$my_reservation->id}}">
+            <input type="hidden" name="rese_id" value="{{$reservation->id}}">
             <dl class="reselist_dl">
               <dt>Date Change</dt>
-              <dd><input type="date" name="change_date" id="date" value="{{$my_reservation->getDate()}}"></dd>
+              <dd><input type="date" name="change_date" id="date" value="{{$reservation->getDate()}}"></dd>
               <dt>Time Change</dt>
               <dd>
                 <div class="select_mark"><select name="change_time">
-                    <option value="{{$my_reservation->getTime()}}">{{$my_reservation->getTime()}}</option>
+                    <option value="{{$reservation->getTime()}}">{{$reservation->getTime()}}</option>
                     @for($i=17; $i < 23 ; $i++ ) <option value="{{$i.':'.'00'}}">{{$i.':'.'00'}}</option>
                       <option value="{{$i.':'.'30'}}">{{$i.':'.'30'}}</option>
                       @endfor
@@ -192,7 +100,7 @@
               <dt>Number Change</dt>
               <dd>
                 <div class="select_mark"><select name="change_number">
-                    <option value="{{$my_reservation->number}}">{{$my_reservation->number}}</option>
+                    <option value="{{$reservation->number}}">{{$reservation->number}}</option>
                     @for($i=1; $i < 11 ; $i++ ) <option value="{{$i}}">{{$i . '人'}}</option>
                       @endfor
                   </select></div>
@@ -202,15 +110,15 @@
             </dl>
           </form>
         </div>
+
       </div>
       @endforeach
     </div>
 
     <div class="right_part">
       <div class="favorite_part">
-        <!--ログイン状態での閲覧-->
         <h2>{{$user->name}}さん</h2>
-        <h3>お気に入り店舗</h3>
+        <h3>■お気に入り店舗</h3><br>
         <div class="favorite_part_content">
           @foreach($my_favorites as $my_favorite)
           <!--以下、表示-->
@@ -240,6 +148,9 @@
         @endauth
       </div>
     </div>
+
+
+
   </div>
   <script src="{{ asset('js/mypage.js') }}"></script>
   @endsection

@@ -1,0 +1,137 @@
+
+/*幅*/
+.right_part {
+  width: 50%;
+}
+
+.left_part {
+  width: 50%;
+}
+
+/*セレクトタグのデザイン用クラスのwidth、他は親レイアウトで設定*/
+div.select_mark {
+  width: 60%;
+  margin: 20px;
+}
+
+/*飲食店詳細情報*/
+
+div.shop_detail_card {
+    width: 80%;
+}
+
+.shop_detail_card_image img {
+    width: 100%;
+}
+
+.shop_detail_card p {
+    margin: 10px 0px;
+}
+
+/*予約パート*/
+div.rese_card {
+  width: 85%;
+  max-width: 480px; 
+  min-width: 180px;  
+  min-height: 300px;
+  background: Blue;
+  border-radius: 10px;
+  color: white;
+}
+
+.rese_card form {
+  width: 100%;
+}
+
+.rese_card select,
+input {
+  display: block;
+  height: 28px;
+  box-sizing: content-box;
+  border: none;
+  border-radius: 3px;
+  font-size: 12px;
+  padding-left: 3px;
+}
+
+.rese_card input {
+  margin: 20px;
+}
+
+dl.rese_confirmation {
+  width: 80%;
+  padding: 10px;
+  background: RoyalBlue;
+  border-radius: 10px;
+  margin: 0px 10px 50px 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.rese_confirmation dt {
+  width: 30%;
+  line-height: 30px;
+}
+
+.rese_confirmation dd {
+  width: 70%;
+  line-height: 30px;
+}
+
+dl.rese_confirmation input {
+  background: transparent;
+  border: none;
+}
+
+.rese_card h3 {
+  padding-top: 30px;
+  margin: 20px;
+}
+
+.rese_card p {
+  padding: 50px;
+}
+
+.rese_card p a {
+  color: white;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.rese_card button {
+  width: 100%;
+  display: block;
+  background-color: MediumBlue;
+  border-radius: 0px 0px 10px 10px;
+  border: none;
+  margin: 0;
+  padding: 5px;
+  font-size: 14px;
+  color: white;
+}
+
+/*店舗情報パート*/
+a.return {
+    position: relative;
+    margin-left: 25px;
+}
+
+a.return::before {
+  font-family: "Font Awesome 5 Free";
+  content: '\f191';
+  font-weight: 400;
+  font-size: 1.5em;
+  background-color: white;
+  color: black;
+  position: absolute;
+  top: 40%;
+  left: -25px;
+  transform: translate(0, -50%);
+}
+
+
+@media screen and (max-width: 768px) {
+  .rese_card input,.rese_card select,.rese_card dl {
+    font-size: 10px;
+  }  
+}

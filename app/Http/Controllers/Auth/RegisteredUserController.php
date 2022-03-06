@@ -44,18 +44,16 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
         ]);
         /*ハッシュ化（Hash::make）：特定の計算手法に基づいて、元のデータを不規則な文字列に置換する処理*/
-
         /*event(new Registered($user)); イベント発生はいらない？*/
-
-        /*Auth::login($user);*/
-        /*「AuthenticatedSessionController」とnamespaceが同じ*/
-
-        return redirect("/complete");
+        if($request->role == 5){
+            return view('auth.thanks');
+        }
+        return view('auth.thanks_admin');
         /*RouteServiceProvider::HOME)→'/dashboard'なので、変更予定*/
     }
 }

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Cashier\Billable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -58,11 +60,18 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Models\Favorite');
     }
+
+    /*Favoriteとのリレーション*/
+    public function reviews()
+    {
+        return $this->hasManyThrough('App\Models\Review', 'App\Models\Reservation');
+    }
+
     /*Shopとのリレーション*/
     public function shops()
     {
+        /*optionalヘルパにより、お気に入りがない場合はエラーではなくnullを返す*/
         $favorites = optional($this->favorites);
-        $may_shops = a;
 
         return optional($this->favorites);
     }

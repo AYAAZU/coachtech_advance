@@ -8,6 +8,7 @@ const fucn_serch = function() {
     var area_designated = document.getElementById("area_keyword").value;
     var genre_designated = document.getElementById("genre_keyword").value;
     var name_designated = document.getElementById("name_keyword").value;
+    console.log("hello");
 
     Array.from(shops_all).forEach(function(item, index) {
         item.style.display = 'block';
@@ -47,4 +48,12 @@ const fucn_serch = function() {
 area_keyword.addEventListener("change", fucn_serch);
 genre_keyword.addEventListener("change", fucn_serch);
 name_keyword.addEventListener("input", fucn_serch);
+
+/*レビュー表示
+const fucn_serch = function () {
+    var star
+    const stars = document.getElementsByClassName("stars");
+}*/
+
+
 

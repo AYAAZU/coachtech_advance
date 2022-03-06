@@ -17,6 +17,8 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
 Route::post('/register', [RegisteredUserController::class, 'store'])
                 ->middleware('guest');
 
+Route::post('/admin/register', [RegisteredUserController::class, 'store']);
+
 Route::get('/complete', function () {
   return view('auth.thanks');
 });

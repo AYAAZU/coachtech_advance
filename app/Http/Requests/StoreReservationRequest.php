@@ -30,11 +30,9 @@ class StoreReservationRequest extends FormRequest
     public function rules()
     {
         return [
-            'date' => 'required|date|after:tomorrow',
-            /*|after:tomorrow 未設定*/
-            /*unique（例　unique:テーブル名、カラム名）未設定*/
-            'time' => 'required|max:255',
-            'number' => 'required|integer|max:255',
+            'date' => 'required|date|after:today',
+            'time' => 'required|date_format:H:i',
+            'number' => 'required|integer|min:1|max:10',
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class ReservationSeeder extends Seeder
+class ReservationTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
