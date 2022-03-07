@@ -16,7 +16,7 @@
       <div class="shop_detail_card">
         <p><a href="/" class="return"></a><span class="font_bigger">{{$shop->name}}</span></p>
         <div class="shop_detail_card_image">
-          <img src="{{$shop->image}}" alt="img">
+          <img src="/storage/shop_image/{{$shop->image}}" alt="shop image">
         </div>
         <p><span>#{{$shop->getArea()}}</span><span>#{{$shop->getGenre()}}</span></p>
         <p>{{$shop->info}}</p>

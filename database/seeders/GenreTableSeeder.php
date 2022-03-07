@@ -18,7 +18,6 @@ class GenreTableSeeder extends Seeder
     {
         $now = Carbon::now();
 
-
         $param = [
             'name' => '寿司',
             'created_at' => $now

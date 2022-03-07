@@ -123,7 +123,9 @@
           @foreach($my_favorites as $my_favorite)
           <!--以下、表示-->
           <div class="shop_card">
-            <div class="shop_card_image"><img src="{{$my_favorite->shop->image}}" alt="img"></div>
+            <div class="shop_card_image">
+              <img src="/storage/shop_image/{{$my_favorite->shop->image}}" alt="shop image">
+            </div>
             <div class="shop_card_content">
               <h3>{{$my_favorite->shop->name}}</h3>
               <p><span>#{{$my_favorite->shop->getArea()}}</span><span>#{{$my_favorite->shop->getGenre()}}</span></p>

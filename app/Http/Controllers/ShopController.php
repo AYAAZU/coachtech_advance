@@ -91,20 +91,8 @@ class ShopController extends Controller
         $areas = Area::all();
         $genres = Genre::all();
         $favorites = Favorite::where('user_id', Auth::id());
-
-        /*評価の表示
-        $my_stars =*/
-
         return view('welcome', ['shops' => $shops, 'areas' => $areas, 'genres' => $genres, 'favorites' => $favorites]);
     }
-
-    /*飲食店検索結果の表示
-    public function serch(Request $request)
-    {
-        $area_id = Area::where('name', $request->area_name);
-        $shops = Shop::where('area_id', $area_id)->all();
-        return view('welcome', ['shops' => $shops]);
-    }*/
 
     /*飲食店の詳細*/
     public function shop_detail($shop_id)
@@ -112,8 +100,6 @@ class ShopController extends Controller
         $shop = Shop::where('id', $shop_id)->first();
         return view('shop_detail', ['shop' => $shop,]);
     }
-
-
 
     /*お気に入りの追加・削除*/
     public function favorite_add(Request $request){
@@ -139,17 +125,25 @@ class ShopController extends Controller
         }
 
 
-    /*以下、データのインポート*/
-    public function index_import()
+
+    /*以下、イメージのインポート*/
+    public function image()
     {
-        return view('index');
+        return view('image');
     }
 
-    public function import(Request $request)
+    public function image_save(Request $request)
     {
-        $file = $request->file('file');
-        Excel::import(new ShopsImport, $file);
 
-        return redirect('/shops')->with('success', 'All good!');
+        /*店舗写真をストレージへ保存　*/
+        $image_path = $request->file('image')->storeAs('public/shop_image', $request->shop_id);
+
+        $shop = Shop::find($request->shop_id);
+        $shop->image = basename($image_path);
+        $shop->save();
+
+        return redirect('/image')->with('success', 'All good!');
     }
+
+
 }

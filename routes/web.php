@@ -50,6 +50,9 @@ Route::post('/mail', [MailSendController::class, 'send']);
 /*以下、データのインポート*/
 Route::get('/shops', [ShopController::class, 'index_import']);
 Route::post('/shops', [ShopController::class, 'import']);
+
+Route::get('/image', [ShopController::class, 'image']);
+Route::post('/image', [ShopController::class, 'image_save']);
 /*以上、データのインポート*/
 
 require __DIR__.'/auth.php';

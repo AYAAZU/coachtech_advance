@@ -50,10 +50,7 @@
                     </div>
                     <!--以下、表示-->
                     <div class="shop_card_image">
-                        @if( $shop->id < 21 ) <img src="{{$shop->image}}" alt="shop image">
-                            @else
-                            <img src="/storage/shop_image/{{$shop->image}}" alt="shop image">
-                            @endif
+                        <img src="/storage/shop_image/{{$shop->image}}" alt="shop image">
                     </div>
                     <div class="shop_card_content">
                         <div class="justify_content_for_card">
