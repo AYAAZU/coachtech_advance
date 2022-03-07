@@ -12,18 +12,9 @@ use App\Http\Requests\StoreShopReqest;
 use App\Http\Requests\UpdateShopReqest;
 use Illuminate\Support\Facades\Gate;
 
-/*いらないかも？*/
-use Illuminate\Support\Facades\Validator;
-use App\Models\User;
 
 /*画像ファイル削除*/
 use Illuminate\Support\Facades\Storage;
-
-/*追加*/
-use App\Imports\ShopsImport;
-use App\Models\Review;
-use Maatwebsite\Excel\Facades\Excel;
-
 
 class ShopController extends Controller
 {
@@ -56,7 +47,6 @@ class ShopController extends Controller
     {
         /*ユーザーの認可　*/
         Gate::authorize('isAdmin_shop');
-        
         $shop = Shop::where('admin_user_id', Auth::id())->first();
         $form = $request->all();
         unset($form['_token']);
@@ -134,7 +124,6 @@ class ShopController extends Controller
 
     public function image_save(Request $request)
     {
-
         /*店舗写真をストレージへ保存　*/
         $image_path = $request->file('image')->storeAs('public/shop_image', $request->shop_id);
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Reservation;
+use App\Models\User;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Stripe\Checkout\Session;
@@ -12,7 +14,8 @@ class StripeController extends Controller
     public function index_stripe(Request $request)
     {
 
-        return view('stripe_payment');
+        $reservation = Reservation::find($request->reservation_id);
+        return view('stripe_payment',['reservation' => $reservation]);
     }
 
     public function charge(Request $request){
@@ -24,7 +27,8 @@ class StripeController extends Controller
                     'product_data' => [
                         'name' => 'food',
                     ],
-                    'unit_amount' => 1500,
+                    
+                    'unit_amount' => $request->amount,
                     'currency' => 'jpy',
                 ],
                 'quantity' => 1,
@@ -38,13 +42,4 @@ class StripeController extends Controller
 
     }
 
-    /*public function charge/(Request $request){
-        /Stripe::setApiKey(env('STRIPE_SECRET'));
-        $charge = Charge::create(array(
-            'amount' => request()->amount,
-            'currency' => 'jpy',
-            'source' => request()->stripeToken
-        ));
-        return back();*/
-    /*}*/
 }

@@ -34,7 +34,7 @@ Route::get('/generate-qrcode/{reservation_id}', [QrCodeController::class, 'index
 Route::get('/reservationinfo/{reservation_id}', [QrCodeController::class, 'qrcode_result']);
 
 /*Stripe*/
-Route::get('/stripe', [StripeController::class, 'index_stripe']);
+Route::post('/stripe', [StripeController::class, 'index_stripe']);
 Route::post('/charge', [StripeController::class, 'charge'])->name('stripe.charge');
 
 /*店舗代表者*/

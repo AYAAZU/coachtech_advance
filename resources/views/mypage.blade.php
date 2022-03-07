@@ -75,7 +75,15 @@
         <div class="qr">
           <form action="/generate-qrcode/{{$reservation->id}}" method="get">
             <input type="hidden" name="reservation_id" value="{{$reservation->id}}">
-            <button>QRコード表示</button>
+            <button>予約情報の提示（QRコード）</button>
+          </form>
+        </div>
+        <!--stripeによる決裁-->
+        <div class="stripe">
+          <form action="/stripe" method="post">
+            @csrf
+            <input type="hidden" name="reservation_id" value="{{$reservation->id}}">
+            <button>クレジットカードで支払う</button>
           </form>
         </div>
         <!--予約変更-->

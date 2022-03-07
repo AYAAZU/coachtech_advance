@@ -41,5 +41,11 @@ class GenreTableSeeder extends Seeder
             'created_at' => $now
         ];
         DB::table('genres')->insert($param);
+
+        $param = [
+            'name' => 'ラーメン',
+            'created_at' => $now
+        ];
+        DB::table('genres')->insert($param);
     }
 }

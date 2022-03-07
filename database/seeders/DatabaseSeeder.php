@@ -16,19 +16,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        /*Schema::disableForeignKeyConstraints(); //外部キーチェックを無効にする
-        \App\Models\Reservation::truncate();
-        Schema::enableForeignKeyConstraints(); //外部キーチェックを有効にする*/
-
-        
+        $this->call(UserTableSeeder::class);
+        $this->call(AreaTableSeeder::class);
+        $this->call(GenreTableSeeder::class);
         $this->call(ShopTableSeeder::class);
-        /*$this->call(UserTableSeeder::class);
-        /*$this->call(AreaTableSeeder::class);*/
-        /*$this->call(GenreTableSeeder::class);
-        /*$this->call(ReservationTableSeeder::class);*/
-        /*$this->call(FavoriteTableSeeder::class);*/
-        /*$this->call(ReviewTableSeeder::class);*/
-        /*$this->call(*TableSeeder::class);*/
+        $this->call(ReservationTableSeeder::class);
+        $this->call(FavoriteTableSeeder::class);
+        $this->call(ReviewTableSeeder::class);
+        
 
     }
 }
