@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
   <title>Rese_admin</title>
   <!-- Styles -->
@@ -61,4 +58,3 @@
   </div>
   @endsection
 
-</html>

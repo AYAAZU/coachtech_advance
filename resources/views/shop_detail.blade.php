@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
   <title>{{$shop->name}}</title>
   <!-- Styles -->
@@ -81,4 +78,3 @@
   @endsection
 </body>
 
-</html>

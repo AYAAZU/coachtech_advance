@@ -1,4 +1,4 @@
-/*検索バー*/
+/*検索*/
 const shops_all = document.getElementsByClassName("shop_card");
 var area_keyword = document.getElementById("area_keyword");
 var genre_keyword = document.getElementById("genre_keyword");
@@ -49,11 +49,6 @@ area_keyword.addEventListener("change", fucn_serch);
 genre_keyword.addEventListener("change", fucn_serch);
 name_keyword.addEventListener("input", fucn_serch);
 
-/*レビュー表示
-const fucn_serch = function () {
-    var star
-    const stars = document.getElementsByClassName("stars");
-}*/
 
 
 
