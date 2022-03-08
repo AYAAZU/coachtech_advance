@@ -7,39 +7,45 @@ use App\Models\Reservation;
 use App\Models\User;
 use Stripe\Stripe;
 use Stripe\Charge;
+use Stripe\Customer;
 use Stripe\Checkout\Session;
 
 class StripeController extends Controller
 {
     public function index_stripe(Request $request)
     {
-
         $reservation = Reservation::find($request->reservation_id);
         return view('stripe_payment',['reservation' => $reservation]);
     }
 
-    public function charge(Request $request){
+
+    /*単発決済用のコード $request->amount*/
+    public function charge(Request $request)
+    {
         Stripe::setApiKey(env('STRIPE_SECRET'));
-        $session = Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'product_data' => [
-                        'name' => 'food',
-                    ],
-                    
-                    'unit_amount' => $request->amount,
-                    'currency' => 'jpy',
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => 'http://127.0.0.1:8000/stripe',
-            'cancel_url' => 'http://127.0.0.1:8000/',
-        ]);
+        
+        try {
+            Stripe::setApiKey(env('STRIPE_SECRET'));
 
+            $customer = Customer::create(array(
+                'email' => $request->stripeEmail,
+                'source' => $request->stripeToken
+            ));
 
+            $charge = Charge::create(array(
+                'customer' => $customer->id,
+                'amount' => $request->amount,
+                'currency' => 'jpy'
+            ));
 
+            return redirect('/maypage');
+        } catch (\Exception $ex) {
+            return $ex->getMessage();
+        }
     }
+
+
+
+
 
 }

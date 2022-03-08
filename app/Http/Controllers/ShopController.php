@@ -12,8 +12,6 @@ use App\Http\Requests\StoreShopReqest;
 use App\Http\Requests\UpdateShopReqest;
 use Illuminate\Support\Facades\Gate;
 
-
-/*画像ファイル削除*/
 use Illuminate\Support\Facades\Storage;
 
 class ShopController extends Controller

@@ -49,7 +49,7 @@ class UserTableSeeder extends Seeder
             'name' => '店舗　四郎',
             'email' => 'shiro@mail.com',
             'password' => Hash::make('passwordshiro'),
-            'role' => '5',
+            'role' => '3',
             'created_at' => $now
         ];
         DB::table('users')->insert($param);

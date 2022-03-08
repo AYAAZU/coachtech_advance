@@ -1,4 +1,14 @@
-## About rese_matsuda
+## About rese_matsuda（課題提出として）
+user(id=1)はサービス管理者
+user(id=2)は「仙人」店舗代表者
+user(id=3)は「牛助」店舗代表者
+user(id=4)は店舗情報未作成の新規店舗代表者
+user(id=5～7)はサービスのユーザーです。
+※ログインID（email）、パスワードはUserTableSeeder.phpでご確認頂けますと幸いです。
+※デモ結果をコントロールするためファクトリは利用していません。
+
+
+## About rese_matsuda（以下は一般的なアプリ公開をイメージして作成）
 
 rese_matsuda is a web application to make reservations for restaurants.
 rese_matsuda let restaurant users make reservations quickly.

@@ -40,7 +40,8 @@
                         <button class="bluetype">
                             {{ __('Log in') }}
                         </button>
-                    </div>
+                    </div><br>
+                    <div><a href="/forgot-password">パスワードを忘れた方はこちら</a></div>
                     <!-- Validation Errors-->
                     @if ($errors->any())
                     <div>

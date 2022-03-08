@@ -135,7 +135,7 @@
         @else
         <div class="shop_image">
           <p>・現在登録されている画像</p>
-          @if( $shop->id < 21 ) <img src="{{$shop->image}}" alt="画像はありません">
+          @if( $shop->id < 21 ) <img src="/storage/shop_image/{{$shop->image}}" alt="shop image">
             @else
             <img src="/storage/shop_image/{{$shop->image}}" alt="画像はありません">
             @endif
